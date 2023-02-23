@@ -13,7 +13,7 @@ library(reshape2)
 
 # ------ Hier data van Xandra --------
 
-# Dus ik mag hier iets toevoegen?
+# Dus ik mag hier iets toevoegen
 Xandra <- "is de beste"
 
 # temp data:
