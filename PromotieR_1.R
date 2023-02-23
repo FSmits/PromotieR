@@ -4,7 +4,7 @@ rm(list=ls())
 
 # ----- Packages ----- 
 ### Run this line only once:
-install.packages("dplyr"); install.packages("ggplot2"); install.packages("stringr"); install.packages("reshape2"); 
+# install.packages("dplyr"); install.packages("ggplot2"); install.packages("stringr"); install.packages("reshape2"); 
 
 library(dplyr)
 library(ggplot2)
@@ -12,6 +12,9 @@ library(stringr)
 library(reshape2)
 
 # ------ Hier data van Xandra --------
+
+# Dus hier mag ik iets toevoegen?
+Xandra <- "is de beste"
 
 # temp data:
 SPSS.users  <- c(3,2,3,4,1,3)
