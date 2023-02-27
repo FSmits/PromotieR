@@ -2,7 +2,7 @@
 
 rm(list=ls())
 
-# ----- Packages ----- 
+# --------- Packages --------- 
 ### Run this line only once:
 # install.packages("dplyr"); install.packages("ggplot2"); install.packages("stringr"); install.packages("reshape2"); 
 
@@ -11,31 +11,38 @@ library(ggplot2)
 library(stringr)
 library(reshape2)
 
-# ------ Hier data van Xandra --------
+# ------ Prepare data --------
 
-# Dus ik mag hier iets toevoegen
-Xandra <- "is de beste"
-
-# temp data:
+# create data frame
 SPSS.users  <- c(3,2,3,4,1,3)
-R.users     <- SPSS.users*2
+set.seed(123); R.users     <- sample(5:10, 6) # run together
 df          <- as.data.frame(cbind(SPSS.users,R.users))
-df$domein   <- c("lichaamsfuncties", "dagelijks functioneren", "zingeving", "meedoen", "kwaliteit van leven", "mentaal welbevinden")
-plot_df     <- reshape2::melt(df)
-  
-# toch omdraaien kolommen en rijen voor plot
+df$R.users[df$R.users < 7] <- 7
+
+# add domain
+df$domein   <- c("Lichaamsfuncties", "Dagelijks functioneren", "Zingeving", "Meedoen", "Kwaliteit van leven", "Mentaal welbevinden")
+
+# create data frame for plot
+plot_df     <- reshape2::melt(df, id = "domein")
 
 
 # ------ Het figuur -------
 
 # Voorbeeldscript van R gallery:  (link: https://r-graph-gallery.com/web-circular-barplot-with-R-and-ggplot2.html)
 
+scale_range <- seq(0, 10, 2)
 # Make the plot
 plt <- ggplot(plot_df) +
-  geom_hline( aes(yintercept = y), data.frame(y=0:max(plot_df$value)), color="lightgrey" ) +
+  geom_hline( aes(yintercept = y), data.frame(y=scale_range), color="lightgrey" ) +
   geom_col( aes(x=str_wrap(domein,5), y=value, fill=domein), position = "dodge2", show.legend = TRUE, alpha = .9) +
   xlab(" ") + ylab("Waarde") + 
   coord_polar() +
+  # Annotate custom scale inside plot
+  annotate(x = 6.5, y = 2.3, label = "2", geom = "text", size = 2, color = "gray12") +
+  annotate(x = 6.5, y = 4.3, label = "4", geom = "text", size = 2, color = "gray12") +
+  annotate(x = 6.5, y = 6.3, label = "6", geom = "text", size = 2, color = "gray12") +
+  annotate(x = 6.5, y = 8.3, label = "8", geom = "text", size = 2, color = "gray12") +
+  annotate(x = 6.5, y = 10.3, label = "10", geom = "text", size = 2, color = "gray12") +
   facet_wrap( . ~ variable)
 
 # Add labels & Change colors
@@ -45,9 +52,9 @@ plt + labs(
   caption = "Voor meer datavisualisatie inspo: https://r-graph-gallery.com/") +
   scale_fill_manual(values=c("#6C5B7B","#C06C84","#F67280","#F8B195","#F8B222","#C2C185")) +
   theme(text = element_text(size = 10, color = "gray12"), 
-        plot.title = element_text(face = "bold", size = 15, hjust = .05),
-        plot.subtitle = element_text(size = 13, hjust = .05),
-        axis.title = element_blank(),axis.ticks = element_blank(), axis.text.y = element_blank(),legend.position = "bottom", 
+        plot.title = element_text(face = "bold", size = 15, hjust = 0),
+        plot.subtitle = element_text(size = 13, hjust = 0),
+        axis.title = element_blank(),axis.ticks = element_blank(), axis.text.y = element_blank(), legend.position = "bottom", 
         panel.background = element_rect(fill = "white", color = "white"),panel.grid = element_blank(),panel.grid.major.x = element_blank() )
 
 
