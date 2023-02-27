@@ -20,10 +20,10 @@ df          <- as.data.frame(cbind(SPSS.users,R.users))
 df$R.users[df$R.users < 7] <- 7
 
 # add domain
-df$domein   <- c("Lichaamsfuncties", "Dagelijks functioneren", "Zingeving", "Meedoen", "Kwaliteit van leven", "Mentaal welbevinden")
+df$Domein   <- c("Lichaamsfuncties", "Dagelijks functioneren", "Zingeving", "Meedoen", "Kwaliteit van leven", "Mentaal welbevinden")
 
 # create data frame for plot
-plot_df     <- reshape2::melt(df, id = "domein")
+plot_df     <- reshape2::melt(df, id = "Domein")
 
 
 # ------ Het figuur -------
@@ -34,7 +34,7 @@ scale_range <- seq(0, 10, 2)
 # Make the plot
 plt <- ggplot(plot_df) +
   geom_hline( aes(yintercept = y), data.frame(y=scale_range), color="lightgrey" ) +
-  geom_col( aes(x=str_wrap(domein,5), y=value, fill=domein), position = "dodge2", show.legend = TRUE, alpha = .9) +
+  geom_col( aes(x=str_wrap(Domein,5), y=value, fill=Domein), position = "dodge2", show.legend = TRUE, alpha = .9) +
   xlab(" ") + ylab("Waarde") + 
   coord_polar() +
   # Annotate custom scale inside plot
