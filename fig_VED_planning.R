@@ -38,7 +38,7 @@ plt_planning <- ggplot(data, aes(x="", y=value, fill=group)) +
 
 plt_planning + labs(
   title = "VED Planning",
-  subtitle ="The world is run by those wiling to sit until the end of meetings",
+  subtitle ="The world is run by those willing to sit until the end of meetings",
   caption = "Voor meer datavisualisatie inspo: https://r-graph-gallery.com/") +
   scale_fill_manual(values=c("#6C5B7B","#C06C84","#F67280","#F8B195","#F8B222","#C2C185")) +
   theme(text = element_text(size = 10, color = "gray12"), 
