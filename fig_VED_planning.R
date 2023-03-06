@@ -31,9 +31,7 @@ data$group <- factor(data$group, levels = c("Intro", "Prijsuitreiking", "Filmpje
 plt_planning <- ggplot(data, aes(x="", y=value, fill=group)) +
   geom_bar(stat="identity", width=1, color="white") +
   coord_polar("y", start=0, direction = -1) +
-  annotate(x = 1.55, y = 0.5, label = "Start of meeting", geom = "text", size = 2, color = "gray12") +
-  annotate(x = 1.55, y = 0.5, label = "Start of meeting", geom = "text", size = 2, color = "gray12") +
-  annotate(x = 1.55, y = 0.5, label = "Start of meeting", geom = "text", size = 2, color = "gray12") +  
+  annotate(x = 1.55, y = 0.5, label = "Start of meeting", geom = "text", size = 5, color = "gray12") + 
   theme_void() # remove background, grid, numeric labels
 
 plt_planning + labs(
@@ -46,4 +44,5 @@ plt_planning + labs(
         plot.subtitle = element_text(size = 13),
         axis.title = element_blank(),axis.ticks = element_blank(), axis.text.y = element_blank(), legend.position = "bottom", 
         legend.title = element_blank(),
+        legend.text=element_text(size=10),
         panel.background = element_rect(fill = "white", color = "white"),panel.grid = element_blank(),panel.grid.major.x = element_blank() )
