@@ -63,3 +63,4 @@ plt + labs(
 # Hoe hoog is scoren R users op 'dagelijks functioneren'?
 # Op welk domein is het verschil tussen SPSS-gebruikers en R-gebruikers het grootst?
 # Bonus: veranderen de plot kleuren in de kleuren van het EC
+
