@@ -4,13 +4,14 @@ rm(list=ls())
 
 # --------- Packages --------- 
 ### Run this line only once:
-# install.packages("dplyr"); install.packages("ggplot2"); install.packages("ggpubr"); install.packages("stringr"); install.packages("reshape2"); 
+# install.packages("dplyr"); install.packages("ggplot2"); install.packages("ggpubr"); install.packages("stringr"); install.packages("reshape2"); install.packages("svglite") 
 
 library(dplyr)
 library(ggplot2)
 library(ggpubr)
 library(stringr)
 library(reshape2)
+library(svglite)
 
 # ------ Prepare data --------
 
@@ -47,7 +48,7 @@ plt <- ggplot(plot_df) +
   facet_wrap( . ~ variable)
 
 # Add labels & Change colors
-plt + labs(
+p <- plt + labs(
   title = "Positive Health Web: SPSS vs. R",
   subtitle ="If you strive for a happier life, you might want to start to use R.",
   caption = "Voor meer datavisualisatie inspo: https://r-graph-gallery.com/") +
@@ -57,12 +58,11 @@ plt + labs(
         plot.subtitle = element_text(size = 13, hjust = 0),
         axis.title = element_blank(),axis.ticks = element_blank(), axis.text.y = element_blank(), legend.position = "bottom", 
         panel.background = element_rect(fill = "white", color = "white"),panel.grid = element_blank(),panel.grid.major.x = element_blank() )
+p
 
-# Vragen
-# Wie scoren beter op 'kwaliteit van leven'?
-# Hoe hoog is scoren R users op 'dagelijks functioneren'?
-# Op welk domein is het verschil tussen SPSS-gebruikers en R-gebruikers het grootst?
-# Bonus: veranderen de plot kleuren in de kleuren van het EC
+ggsave("QoL_Rusers.svg", p, device = "svg")
+
+
 
 
 
