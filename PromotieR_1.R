@@ -64,5 +64,3 @@ ggsave("QoL_Rusers.svg", p, device = "svg")
 
 
 
-
-
