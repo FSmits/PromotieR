@@ -1,7 +1,10 @@
-library(gapminder)
+# install packages
+# install.packages("ggplot2"); install.packages("gganimate"); install.packages("gifski)
+library(ggplot2)
 library(gganimate)
 library(gifski)
 
+## data preperation
 EC <- data.frame(
   year <- rep(rep((2000:2023), 5)),
   group <- rep(c("Elbert", "seniors", "phd's", "research assistents", "interns"), each = 24)
@@ -15,7 +18,7 @@ EC$productivity[EC$group == "research assistents"]   <- c(seq(from=1,to=8,by=1),
 EC$productivity[EC$group == "interns"]   <- c(seq(from=3,to=8,by=0.25), 7.5, 7, 6.5)
 
 
-## standard ggplot2
+## plot EC producticity over time
 myPlot <- ggplot(EC[EC$group!="phd's",], aes(x = group, y = productivity, fill=group)) +
   geom_bar(stat = "summary") +
   scale_fill_manual(values = c("#e09d5e","#df7125","#364f63","#136497","#7cb6e3")) +
@@ -26,7 +29,7 @@ myPlot <- ggplot(EC[EC$group!="phd's",], aes(x = group, y = productivity, fill=g
   theme(panel.background = element_rect(fill="white",colour="white"))
 
 animate(myPlot, duration = 15, fps = 5, renderer = gifski_renderer())
-anim_save("output.gif")
+anim_save("output.gif") #save plot output
 
 
 
