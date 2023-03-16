@@ -14,9 +14,9 @@ EC$productivity[EC$group == "phd's"]   <- seq(from=1,to=13,by=0.5)
 EC$productivity[EC$group == "research assistents"]   <- c(seq(from=1,to=8,by=1), rep(c(8,9), 8))
 EC$productivity[EC$group == "interns"]   <- c(seq(from=3,to=8,by=0.25), 7.5, 7, 6.5)
 
-#[EC$group!="phd's",]
+
 ## standard ggplot2
-myPlot <- ggplot(EC, aes(x = group, y = productivity)) +
+myPlot <- ggplot(EC[EC$group!="phd's",], aes(x = group, y = productivity)) +
   geom_bar(stat = "summary") +
   scale_colour_manual(values = country_colors) +
   # Here comes the gganimate specific bits
