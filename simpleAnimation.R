@@ -16,11 +16,11 @@ EC$productivity[EC$group == "interns"]   <- sample(3:7, 24, replace = TRUE)
 
 
 ## standard ggplot2
-myPlot <- ggplot(EC, aes(x = group, y = niveau)) +
+myPlot <- ggplot(EC[EC$group!="phd's",], aes(x = group, y = productivity)) +
   geom_bar(stat = "summary") +
   scale_colour_manual(values = country_colors) +
   # Here comes the gganimate specific bits
-  labs(title = 'Year: {frame_time}', x = 'group', y = 'Productiviteit') +
+  labs(title = 'Year: {frame_time}', x = 'Group', y = 'Productiviteit') +
   transition_time(year) +
   ease_aes('linear')
 
