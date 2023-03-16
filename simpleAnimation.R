@@ -15,7 +15,6 @@ EC$productivity[EC$group == "research assistents"]   <- sample(1:10, 24, replace
 EC$productivity[EC$group == "interns"]   <- sample(3:7, 24, replace = TRUE)
 
 
-
 ## standard ggplot2
 myPlot <- ggplot(EC, aes(x = group, y = niveau)) +
   geom_bar(stat = "summary") +
