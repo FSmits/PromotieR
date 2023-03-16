@@ -2,16 +2,32 @@ library(gapminder)
 library(gganimate)
 library(gifski)
 
+EC <- data.frame(
+  year <- rep(rep((2000:2023), 5)),
+  group <- rep(c("Elbert", "senior's", "phd's", "research assistents", "interns"), each = 24)
+)
+colnames(EC) <- c("year", "group")
+
+EC$productivity[EC$group == "Elbert"]   <- sample(2:8, 24, replace = TRUE)
+EC$productivity[EC$group == "Seniors"]   <- sample(2:6, 24, replace = TRUE)
+EC$productivity[EC$group == "phd's"]   <- sample(6:9, 24, replace = TRUE)
+EC$productivity[EC$group == "research assistents"]   <- sample(1:10, 24, replace = TRUE)
+EC$productivity[EC$group == "interns"]   <- sample(3:7, 24, replace = TRUE)
+
+
+
 ## standard ggplot2
-myPlot <- ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
-  geom_point(alpha = 0.7, show.legend = FALSE) +
+myPlot <- ggplot(EC, aes(x = group, y = niveau)) +
+  geom_bar(stat = "summary") +
   scale_colour_manual(values = country_colors) +
-  scale_size(range = c(2, 12)) +
-  scale_x_log10() +
   # Here comes the gganimate specific bits
-  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
+  labs(title = 'Year: {frame_time}', x = 'group', y = 'Productiviteit') +
   transition_time(year) +
   ease_aes('linear')
 
-animate(myPlot, duration = 5, fps = 20, width = 200, height = 200, renderer = gifski_renderer())
+animate(myPlot, duration = 5, fps = 20, renderer = gifski_renderer())
 anim_save("output.gif")
+
+
+
+

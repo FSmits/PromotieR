@@ -41,7 +41,7 @@ TOT_bev_sd = 0.40
 
 
 #### TOT ####
-TOT_indiv_change <- BSI_indiv_change[ , c("ID", "Session", "BSI_TOT")] 
+TOT_indiv_change <- BSI_indiv_change[ , c("ID", "year", "Session", "BSI_TOT")] 
 
 # reshape to wide format
 TOT_indiv_change_wide <- reshape(TOT_indiv_change, direction= "wide", idvar = "ID", timevar = "Session", v.names = "BSI_TOT")
@@ -84,6 +84,90 @@ TOT_per_deelnemer <-TOT_indiv_change_wide %>%
 
 
 TOT_per_deelnemer
+
+
+
+
+
+
+
+
+
+library(gapminder)
+library(gganimate)
+library(gifski)
+
+## standard ggplot2
+myPlot <- ggplot(OGDT_21, aes(x = as.factor(Session), y = BSI_TOT))  +
+  geom_boxplot(fill = "#e1700e", alpha = 0.5, col = "#e1700e", show.legend = F, lwd = .75)
+  # Here comes the gganimate specific bits
+  labs(title = 'Year: {frame_time}', x = 'Session', y = 'BSI totaal') +
+  transition_states(as.factor(year)) +
+  ease_aes('linear')
+
+animate(myPlot, duration = 5, fps = 20, renderer = gifski_renderer())
+anim_save("output.gif")
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------#
+#                               MOVIE
+#------------------------------------------------------------------------------#
+
+map_dir <- 'figures' # directory for temporary maps
+outfile <- 'static/movie.gif' # movie file (this could be several different file types)
+movie_speed <- 5 # movie play speed
+
+df <- OGDT_21
+
+# make maps ---------------------------------------------------------------
+if(!dir.exists(map_dir)){dir.create(map_dir)}
+
+# start and end times
+t0 <- min(df$year)
+t1 <- max(df$year)
+
+# time vector
+# tseq = seq.POSIXt(t0, t1+31*60*60*24, by = 'month')
+tseq = unique(df$year)
+
+# make and save maps
+for(it in 1:(length(tseq)-1)){
+  
+  # # subset within timestep
+  # it0 = tseq[it]
+  # it1 = tseq[it+1]
+  # idf = df[df$time >= it0 & df$time <= it1,]
+  
+  # open map file
+  png(paste0(map_dir,'/', as.character(it)), 
+      width=6, height=6, unit="in", res=175, pointsize=10)
+  
+  df_plot <- df %>%
+    filter(year == it)
+  myPlot <- ggplot(df_plot, aes(x = as.factor(Session), y = BSI_TOT))  +
+    geom_boxplot(fill = "#e1700e", alpha = 0.5, col = "#e1700e", show.legend = F, lwd = .75)
+  
+  # close and save plot
+  dev.off()
+  
+}
+
+# write system command
+cmd = paste0('convert -antialias -delay 1x', movie_speed, ' ', map_dir, '/*.png ', outfile)
+
+# execute system command
+system(cmd)
+
+# remove temporary files
+unlink(map_dir, recursive = T)
+
+
+
 
 
 # ------- niet nodig: --------
