@@ -18,9 +18,9 @@ EC$productivity[EC$group == "research assistents"]   <- c(seq(from=1,to=8,by=1),
 EC$productivity[EC$group == "interns"]   <- c(seq(from=3,to=8,by=0.25), 7.5, 7, 6.5)
 
 
-## plot EC producticity over time
+## plot EC productivity over time
 myPlot <- ggplot(EC[EC$group!="phd's",], aes(x = group, y = productivity, fill=group)) +
-  geom_bar(stat = "summary") +
+  geom_bar(stat = "summary", fun = mean) +
   scale_fill_manual(values = c("#e09d5e","#df7125","#364f63","#136497","#7cb6e3")) +
   # Here comes the gganimate specific bits
   labs(title = 'Jaar: {frame_time}', x = 'Group', y = 'Productiviteit') +
