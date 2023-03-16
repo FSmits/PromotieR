@@ -16,13 +16,14 @@ EC$productivity[EC$group == "interns"]   <- c(seq(from=3,to=8,by=0.25), 7.5, 7, 
 
 
 ## standard ggplot2
-myPlot <- ggplot(EC[EC$group!="phd's",], aes(x = group, y = productivity)) +
+myPlot <- ggplot(EC[EC$group!="phd's",], aes(x = group, y = productivity, fill=group)) +
   geom_bar(stat = "summary") +
-  scale_colour_manual(values = country_colors) +
+  scale_fill_manual(values = c("#e09d5e","#df7125","#364f63","#136497","#7cb6e3")) +
   # Here comes the gganimate specific bits
-  labs(title = 'Year: {frame_time}', x = 'Group', y = 'Productiviteit') +
+  labs(title = 'Jaar: {frame_time}', x = 'Group', y = 'Productiviteit') +
   transition_time(year) +
-  ease_aes('linear')
+  ease_aes('linear') +
+  theme(panel.background = element_rect(fill="white",colour="white"))
 
 animate(myPlot, duration = 15, fps = 5, renderer = gifski_renderer())
 anim_save("output.gif")
