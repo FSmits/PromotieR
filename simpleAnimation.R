@@ -7,19 +7,19 @@ library(gifski)
 ## data preperation
 EC <- data.frame(
   year <- rep(rep((2000:2023), 5)),
-  group <- rep(c("Elbert", "seniors", "phd's", "research assistents", "interns"), each = 24)
+  group <- rep(c("Elbert", "seniors", "PhD'ers", "research assistents", "interns"), each = 24)
 )
 colnames(EC) <- c("year", "group")
 
 EC$productivity[EC$group == "Elbert"]   <- c(seq(from=1,to=4,by=0.5), seq(from=3,to=7,by=1), rep(c(5,6,7), 4)) 
 EC$productivity[EC$group == "seniors"]   <- c(seq(from=1,to=4,by=1), seq(from=7,to=3,by=-1), seq(from=2,to=7,by=0.5), seq(from=5,to=8,by=1))
-EC$productivity[EC$group == "phd's"]   <- seq(from=1,to=13,by=0.5)
+EC$productivity[EC$group == "PhD'ers"]   <- seq(from=1,to=13,by=0.5)
 EC$productivity[EC$group == "research assistents"]   <- c(seq(from=1,to=8,by=1), rep(c(8,9), 8))
 EC$productivity[EC$group == "interns"]   <- c(seq(from=3,to=8,by=0.25), 7.5, 7, 6.5)
 
 
 ## plot EC productivity over time
-myPlot <- ggplot(EC[EC$group!="phd's",], aes(x = group, y = productivity, fill=group)) +
+myPlot <- ggplot(EC, aes(x = group, y = productivity, fill=group)) +
   geom_bar(stat = "summary", fun = mean) +
   scale_fill_manual(values = c("#e09d5e","#df7125","#364f63","#136497","#7cb6e3")) +
   # Here comes the gganimate specific bits
