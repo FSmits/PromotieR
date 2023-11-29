@@ -39,7 +39,7 @@ plotone
 
 # -------- Deel 2 --------- #
 
-newdata <- data.frame(matrix(c(2023,2023,48.0,51.0,"l","h"), nrow=2,ncol=3))
+newdata <- data.frame(matrix(c(2023,2023,48.0,51.0,"laag","hoog"), nrow=2,ncol=3))
 colnames(newdata) <- colnames(df_bewegen)
 df_bewegen <- rbind(df_bewegen,newdata)
 df_bewegen$perc <- as.numeric(df_bewegen$perc)
