@@ -29,7 +29,7 @@ plotone <- df_bewegen %>%
   ggplot(aes(x=jaar, y=perc, group=opleiding, color=opleiding)) +
   geom_line(linewidth=2) +
   labs(title = 'Bewegen in NL', x = 'Jaar', y = 'Percentage dat aan beweegnorm voldoet') +
-  scale_color_manual(values = c("h" = "#e1700e", "l" = "#146496")) +
+  scale_color_manual(values = c("hoog" = "#e1700e", "laag" = "#146496")) +
   theme(panel.grid.major = element_line(colour = "grey"), panel.grid.minor = element_line(colour = "grey"),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
 
@@ -49,7 +49,7 @@ plottwo <- df_bewegen %>%
   ggplot(aes(x=jaar, y=perc, group=opleiding, color=opleiding)) +
   geom_line(linewidth=2) +
   labs(title = 'Bewegen in NL 2023', x = 'Jaar', y = 'Percentage dat aan beweegnorm voldoet') +
-  scale_color_manual(values = c("h" = "#e1700e", "l" = "#146496")) +
+  scale_color_manual(values = c("hoog" = "#e1700e", "laag" = "#146496")) +
   theme(panel.grid.major = element_line(colour = "grey"), panel.grid.minor = element_line(colour = "grey"),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
 
