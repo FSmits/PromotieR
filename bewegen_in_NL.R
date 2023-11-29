@@ -27,7 +27,7 @@ df_bewegen$opleiding <- factor(df_bewegen$opleiding)
 # Plot
 df_bewegen %>%
   ggplot(aes(x=jaar, y=perc, group=opleiding, color=opleiding)) +
-  geom_line() +
+  geom_line(linewidth=2) +
   labs(title = 'Bewegen in NL', x = 'Jaar', y = 'Percentage dat aan beweegnorm voldoet') +
   scale_color_manual(values = c("h" = "#e1700e", "l" = "#146496")) +
   theme(panel.grid.major = element_line(colour = "grey"), panel.grid.minor = element_line(colour = "grey"),
