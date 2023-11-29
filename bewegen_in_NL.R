@@ -18,7 +18,7 @@ library(dplyr)
 df_bewegen <- data.frame(
   jaar = c(2019:2022, 2019:2022),
   perc = c(54, 53, 50, 49, 44, 43.5, 42, 39),
-  opleiding = c("l", "l", "l", "l", "h", "h", "h", "h"))
+  opleiding = c(rep("laag",4), rep("hoog", 4)))
 df_bewegen$opleiding <- factor(df_bewegen$opleiding)
 
 
