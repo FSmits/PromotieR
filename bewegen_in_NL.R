@@ -37,7 +37,7 @@ plotone
 
 
 
-# -------- Zelf toevoegen ---------
+# -------- Deel 2 --------- #
 
 newdata <- data.frame(matrix(c(2023,2023,48.0,51.0,"l","h"), nrow=2,ncol=3))
 colnames(newdata) <- colnames(df_bewegen)
@@ -55,41 +55,4 @@ plottwo <- df_bewegen %>%
 
 library(ggpubr)
 ggarrange(plotone,plottwo)
-
-
-
-# ----------------------- Statistiek ----------------------- #
-
-# Verschillen laag en hoogopgeleiden significant van elkaar als het gaat om 
-# het percentage dat voldoet aan de beweegrichtlijn in 2022?
-#
-# Gebruik voor het beantwoorden van de vraag het dataframe 'data_bewegen_2022'
-# Dit dataframe bevat 2 kolommen: 
-#         1: opleiding (l = laag, h = hoog)
-#         2: richtlijn behaald (0 = nee, 1 = ja)
-
-
-# De data
-# ------------------------------- #
-# Set a seed for reproducibility
-set.seed(123)
-
-# Number of participants
-n_participants <- 100
-
-# Generate data
-opleiding <- sample(c('h', 'l'), n_participants, replace = TRUE, prob = c(0.55, 0.45))
-richtlijn_behaald <- ifelse(opleiding == 'l', rbinom(sum(opleiding == 'l'), 1, 0.8), rbinom(sum(opleiding == 'h'), 1, 0.4))
-data_bewegen_2022 <- data.frame(opleiding = rep(opleiding, each = 1), richtlijn_behaald = c(richtlijn_behaald))
-
-# Display the DataFrame
-head(data_bewegen_2022)
-
-# Frequentie tabel
-FrequentieTabel <- table(data_bewegen_2022$opleiding, data_bewegen_2022$richtlijn_behaald)
-FrequentieTabel
-
-# De toets
-# ------------------------------- #
-# Ga hieronder zelf verder
 
