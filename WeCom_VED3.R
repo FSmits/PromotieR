@@ -4,12 +4,9 @@ rm(list=ls())
 # excel reader 
 ### if not installed, run this line:
 ### install.packages("readxl")
-### install.packages("vcd")
-library("vcd")
+### install.packages("ggplot2")
 library("readxl")
 library("ggplot2")
-library("tidyr")
-library("plyr")
 
 # read data
 my_data <- as.data.frame( read_excel("/Volumes/heronderzoek-6/MGGZ/Fenne/WeCom_LukasArtikel_ArmedOproep.xlsx", na = "NA") )
