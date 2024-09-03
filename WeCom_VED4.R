@@ -9,7 +9,16 @@ library("readxl")
 library("ggplot2")
 
 # read data
-my_data <- as.data.frame( read_excel("/Volumes/heronderzoek-6/MGGZ/Fenne/WeCom_LukasArtikel_ArmedOproep.xlsx", na = "NA") )
+raw_data <- as.data.frame( cbind( c(0,2,105,199),
+                                 c(46,262,2205,2398),
+                                 c(9,12,45,60),
+                                 c(0,0,4,16) ) )
+categories <- as.data.frame( cbind( c("Artikel_Lukas","Armed_oproep","Artikel_Lukas","Armed_oproep"),
+                                    c("Instagram","Instagram","Linkedin","Linkedin") ) )
+colnames(raw_data) <- c( "Clicks", "Impressies", "Likes", "Reposts")
+colnames(categories) <- c("Post_name", "Social_channel")
+
+my_data <- cbind(categories,raw_data)
 
 # view data
 my_data
