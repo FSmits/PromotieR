@@ -3,9 +3,9 @@ rm(list=ls())
 
 # excel reader 
 ### if not installed, run this line:
-### install.packages("readxl")
+### install.packages("tidyr")
 ### install.packages("ggplot2")
-library("readxl")
+library("tidyr")
 library("ggplot2")
 
 # read data
