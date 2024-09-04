@@ -25,7 +25,6 @@ my_data
 
 # put data into long format
 my_data_long <- gather(my_data, readout, numbers, Clicks:Reposts, factor_key=TRUE)
-my_data_long
 
 # plot bar chart
 ggplot(data=my_data_long, aes(x=readout, y=numbers, fill=Post_name, group=Post_name ) ) +
