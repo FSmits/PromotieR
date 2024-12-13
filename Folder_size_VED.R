@@ -5,26 +5,22 @@ rm(list=ls())
 #install.packages("pacman")
 #install.packages("ggplot2")
 #install.packages("gridExtra")
+#install.packages("readr")
 library(pacman)
 library(ggplot2)
 library(gridExtra)
+library("readr")
 
 
-### Set name
+# >>> ---- VUL HIER JE EIGEN NAAM IN EN PAD NAAR MGGZ-MAP op O:-SCHIJF ---- <<<
+### Set name & path
 your_name <- "Xandra"
-
-
-### Get path name
+mggz_path <- "/Users/aplas2/Networkshares/heronderzoek/MGGZ/" ### paste your path to MGGZ directory on O:-drive between the "". End with forward slash (/)
 # mac users: option + right click on MGGZ folder > copy as path name
 # windows users: shift + right click on MGGZ folder > copy as path
-mggz_path <- "/Users/aplas2/Networkshares/heronderzoek/MGGZ/" ### paste your path to MGGZ directory on O:-drive between the ""
 
 
-### Get folder information --> TAKES ±7 MINUTES
-colleagues <- c("Bastiaan", "Xandra", "Danny", "Amber", "Sofie", "Lisette", 
-                "Antoin", "Rosanne", "Sophie", "Margreet", "Elbert", "Lukas", 
-                "Frank", "Remco", "Karlijn", "Martine", "Remko")
-
+### Get folder information
 # Dataframe for results
 results <- data.frame(
   Name = character(),
@@ -35,9 +31,6 @@ results <- data.frame(
 
 p_load(fs,tidyfst)
 sys_time_print({
-  # Loop over colleagues
-  for (your_name in colleagues) {
-    
     # Create path
     path_name <- paste(mggz_path, your_name, sep = "")
     
@@ -67,8 +60,17 @@ sys_time_print({
         stringsAsFactors = FALSE
       ))
     }
-  }
 })
+
+
+### View results
+View(results)
+
+
+### Read others' data from github
+urlfile <- "https://raw.githubusercontent.com/FSmits/PromotieR/refs/heads/main/colleagues_folder_sizes_v2.csv"
+datacsv <- read_csv( url(urlfile), col_names=TRUE)
+results <- datacsv
 
 
 ### Create figure
@@ -105,6 +107,3 @@ plot_size <- ggplot(results, aes(x = reorder(Name, -Total_Size_GB), y = Total_Si
 
 # Combine plots
 grid.arrange(plot_files, plot_size, nrow = 2)
-
-
-
